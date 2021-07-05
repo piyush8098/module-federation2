@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Component1 from 'remoteComponent/Component1';
 import "./index.css";
+import Child from "./Child";
+import {ModuleServiceProvider, useModuleContext} from 'remoteComponent/ModuleContext';
 
-const App = () => (
-    <div>
-        <Component1/>
-        In component 2, the content from component1 above
-    </div>);
+const App = () => {
+    const [showComponent, setShowComponent] = React.useState(false);
+    return (
+        <ModuleServiceProvider>
+            <Child setShowComponent={setShowComponent} showComponent={showComponent}/>
+        </ModuleServiceProvider>);
+}
 
 ReactDOM.render(<App/>, document.getElementById("app"));
